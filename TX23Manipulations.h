@@ -5,7 +5,9 @@
 class TX23manipulations{
   public:
     float metersToMiles(float speed);
+    float getMeterToMile();
   private:
+    const float meterToMile = 2.2369;
     
 };
 
