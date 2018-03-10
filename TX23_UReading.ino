@@ -1,36 +1,27 @@
 #include <LaCrosse_TX23.h>
 #include "TX23Manipulations.h"
+#include "internetConn.h"
 
-//DATA wire connected to arduino port 10
-
-LaCrosse_TX23 anemometer = LaCrosse_TX23(10);
+//DATA wire connected to arduino port 9
+LaCrosse_TX23 anemometer = LaCrosse_TX23(9);
 
 TX23manipulations manipulations;
+internetConn conn;
 
-void setup()
-{
+void setup(){
   Serial.begin(9600);
+   while (!Serial) {
+    ; // wait for serial port to connect. Needed for native USB port only
+  }
+  conn.startConn();
+  
+  conn.printIPAddress();
 }
 
-void loop()
-{
-  String dirTable[]= {"N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW"};
-  float speed;
-  float mphSpeed;
-  int direction;
-  
-  if(anemometer.read(speed, direction))
-  {
-    mphSpeed = manipulations.metersToMiles(speed);
-    Serial.println("Speed = " + String(mphSpeed,1) + " mph");
-    //Serial.println("Speed = " + String(speed,1) + " m/s");
-    Serial.println("Dir = " + dirTable[direction]);    
-  }
-  else
-  {
-    Serial.println("Read error");
-  }
+void loop(){
+  conn.maintainConn();
 
+  manipulations.printTX23Data(anemometer);
   
   //delay between succesive read requests must be at least 2sec, otherwise wind speed will read 0.
   delay(2000);
