@@ -10,8 +10,12 @@ class TX23manipulations{
     float metersToMiles(float speed);
     float getMeterToMile();
     void printTX23Data(LaCrosse_TX23 anemometer);
+    int getDir();
+    int getSpeed();
   private:
     const float meterToMile = 2.2369;
+    int theDirection;
+    float theSpeed;
     
 };
 
