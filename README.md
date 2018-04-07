@@ -22,3 +22,6 @@ Bitcoin - 1JrHQwJWt1JNZepT1EXqPSioXcwD227nnU
 Ethereum - 0xFC9713013e78f6F14bA5064E36f875dbbB32B94a
 
 BSD license, all text above must be included in any redistribution
+
+
+write_data.php needs to go in c:/xampp/htdocs
